@@ -1,7 +1,5 @@
 # CLASS
-# Store/hold the details of each question (text, choices, correct answer, points, difficulty)
-
-class Question:
+class Question:                    # Store/hold the details of each question (text, choices, correct answer, points, difficulty)
     def __init__(self, question: str, choices: list, answer: str, points: int, difficulty: str):
         """   #multi-line comment 
         Constructor:
@@ -17,7 +15,7 @@ class Question:
         self.points = points
         self.difficulty = difficulty
 
-    # Function: display()
+    # Function for display()
     # Display the question, difficulty, points, and choices
     def display(self):
         print("\n╔════════════════════════════════════════════════════════════════════════════════════════════╗")
@@ -194,3 +192,4 @@ def main():
 
 
 main()
+
