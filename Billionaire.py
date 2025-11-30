@@ -42,7 +42,7 @@ def deduct_money(money, points):
 
 # FUNCTION(def) para sa pag ask_question()
 # Handles asking a single question, checking input, giving 3 chances
-def ask_question(q)              #question object = q
+def ask_question(q):              #question object = q
     chances = 3
     correct = False
 
@@ -192,5 +192,6 @@ def main():
 
 
 main()     #diri mag start since na define naman ang 'main'
+
 
 
