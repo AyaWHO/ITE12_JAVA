@@ -31,7 +31,7 @@ class Question:                    # Store/hold the details of each question (te
 
 # FUNCTION para sa pag deduct_money()
 # Computes how much money will be deducted when the user gets a question wrong
-def deduct_money(money: float, points: int) -> float:
+def deduct_money(money, points):
     """    #multi-line comments
     money  -> float (current money)
     points -> int (percentage deduction)
@@ -42,11 +42,11 @@ def deduct_money(money: float, points: int) -> float:
 
 # FUNCTION(def) para sa pag ask_question()
 # Handles asking a single question, checking input, giving 3 chances
-def ask_question(q: Question) -> bool:              #question object ug mag return ture or false
+def ask_question(q)              #question object = q
     chances = 3
     correct = False
 
-    q.display()
+    q.display()                  #display the question ug choices
 
     while chances > 0:
         ans = input("\nEnter your answer (A / B / C / D): ").strip().upper()  #Strip mag remove ug space to reduce error
@@ -171,7 +171,7 @@ def start_game():
 
 # MAIN MENU
 def main():
-    while True:
+    while True:                            #repeat forever until choosing to exit(2)
         print("\n        _===============_      ")
         print("=========   MAIN MENU   =========")
         print("1. Start Game")
@@ -191,5 +191,6 @@ def main():
             print("\nInvalid choice. Try again.")
 
 
-main()
+main()     #diri mag start since na define naman ang 'main'
+
 
