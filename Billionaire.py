@@ -1,56 +1,38 @@
-# CLASS
-class Question:                    # Store/hold the details of each question (text, choices, correct answer, points, difficulty)
-    def __init__(self, question: str, choices: list, answer: str, points: int, difficulty: str):
-        """   #multi-line comment 
-        Constructor:
-        question  -> string (the question text)
-        choices   -> list of strings (choices A-D)
-        answer    -> string (correct answer, e.g. 'A')
-        points    -> integer (for deduction or score)
-        difficulty -> string (difficulty level)
-        """
-        self.question = question
+class Question:                  # Store/hold the details of each question (text, choices, correct answer, points, difficulty)
+    def __init__(self, question: str, choices: list, answer: str, points: int, difficulty: str):     #'_init_ method = constructor 
+       
+        self.question = question             #self. = this. sa java
         self.choices = choices
         self.answer = answer.upper()
         self.points = points
         self.difficulty = difficulty
 
-    # Function for display()
-    # Display the question, difficulty, points, and choices
-    def display(self):
+    # Method for display(), (question, difficulty, points, and choices)
+    def display(self):            
         print("\n╔════════════════════════════════════════════════════════════════════════════════════════════╗")
         print(f"║ Difficulty: {self.difficulty}")
-        print(f"║ For {self.points} points")
+        print(f"║ For {self.points} points")     #access info/variable using 'self.'
         print("╠════════════════════════════════════════════════════════════════════════════════════════════╣")
         print(f"║ Question: {self.question}")
         print("║")
+
         for c in self.choices:
             print("║ " + c)
         print("╚════════════════════════════════════════════════════════════════════════════════════════════╝")
 
-
-# FUNCTION para sa pag deduct_money()
-# Computes how much money will be deducted when the user gets a question wrong
+# Function para sa pag deduct_money(), Computes how much money will be deducted when the user gets a question wrong
 def deduct_money(money, points):
-    """    #multi-line comments
-    money  -> float (current money)
-    points -> int (percentage deduction)
-    returns the deducted amount as float
-    """
     return (points / 100.0) * money
 
-
-# FUNCTION(def) para sa pag ask_question()
-# Handles asking a single question, checking input, giving 3 chances
-def ask_question(q):              #question object = q
-    chances = 3
+# Function, para sa pag ask_question(), check kung correct or dili
+def ask_question(q):              #q kay ang question (question object)
     correct = False
+    chances = 3 
 
-    q.display()                  #display the question ug choices
+    q.display()                   #tawagon ang display method ug e display
 
     while chances > 0:
-        ans = input("\nEnter your answer (A / B / C / D): ").strip().upper()  #Strip mag remove ug space to reduce error
-                                                                              #upper mo covert siya ug Upper case
+        ans = input("\nEnter your answer (A / B / C / D): ").strip().upper()  #Strip mag remove ug space to reduce error,erase extra space, input ma covert siya ug Upper case                              
         if ans == q.answer:
             print("╔══════════╗")
             print("║ Correct!")
@@ -65,29 +47,52 @@ def ask_question(q):              #question object = q
 
             if chances > 0:
                 print(f"Try again. Chances left: {chances}")
+
             else:
                 print("No more chances for this question.")
 
     return correct
 
+# Class 
+class Player:
+    def __init__(self, name, age, address):            
+        self.name = name
+        self.age = age
+        self.address = address
 
-# FUNCTION para ma start_game()
-# Controls the entire game process from intro to asking all questions
+    # Method display user info
+    def display_info(self):
+        print("\n╔════════════ PLAYER INFORMATION ════════════╗")
+        print(f"║ Name    : {self.name}")
+        print(f"║ Age     : {self.age}")
+        print(f"║ Address : {self.address}")
+        print("╚════════════════════════════════════════════╝")
+
+
+# Function to start game (INTRO UG UBAN DETAILS)
 def start_game():
-    money = 1_000_000_000.0        #Initial na mga values
+    money = 1000000000.0        #Initial na mga values (float sa money)
     total_points = 0
     questions_answered = 0
 
     print("\n============================ WELCOME TO WHO WANTS TO BE A BILLIONAIRE ============================")
     print("       *=*=*=*=*=*=*=*=*=*=*=*=*=* Twisted Wonderland Edition *=*=*=*=*=*=*=*=*=*=*=*=*=*=")
-    print("\nDirections: Answer all questions correctly to win the Billion Money!")
-    print("Each question has corresponding points (Easy-15, Average-30, Hard-55)")
-    print("\nNote: Wrong answers deduct percentage from money!\n")
+    print("\nDirections: Answer all questions correctly to win the Billion Money! Each question has corresponding point value (Easy-20, Average-40, and Hard-60), the more difficult the question the higher the points")
+    print("\nNote: If you answer a question incorrectly, the points for that question will be deducted from your total prize. For example, if you miss a 20-point question, 20% will be deducted from your Billion Money.\n")
 
     agree = input("Enter Y(Yes) or N(No) to Proceed: ").strip().upper()
     if agree != "Y":
         print("You did not agree. Returning back to the menu...")
         return
+    
+    # Player Information Input
+    print("\n===== Enter the following =====")
+    name = input("Name: ")
+    age = int(input("Age: "))
+    address = input("Address: ")
+
+    player = Player(name, age, address)    #player object (ug mag tawag constructor)
+    player.display_info()                  #Calls and display method 'display_info' sa class Player
 
     # List of questions
     questions = [
@@ -136,16 +141,20 @@ def start_game():
             ["A. A broken contract", "B. Losing Mostro Lounge", "C. Fear of losing the power he gained", "D. Betrayal by Jade and Floyd"],
             "C", 55, "Hard"
         ),
+        Question(
+            "Who is the housewarden of Savanaclaw?", ["A. Leona", "B. Ruggie", "C. Rook", "D. Jack"],
+            "A", 55, "Hard"
+        )
     ]
 
-    # Loop through all questions
+    # Loop through all questions (isa-isa)
     for q in questions:
         print("\n< <<======================== QUESTION ========================>> >")
         print(f"Current Prize: PHP {money:,.0f}")
 
-        correct = ask_question(q)
+        correct = ask_question(q)   #tawagon ang function na 'ask_question' 
         questions_answered += 1
-
+        
         if correct:
             total_points += q.points
             print(f"You earned {q.points} points!")
@@ -161,7 +170,7 @@ def start_game():
             print("╚═════════════════════════════════════════════════════════════════════════╝")
             break
 
-    # Game Over
+    # Game Over Display
     print("\n================>>> GAME OVER <<<================")
     print(f"Remaining Money: PHP {money:,.0f}")
     print(f"Total Points Earned: {total_points}")
@@ -169,29 +178,27 @@ def start_game():
     print("\n================>>>>>>>>><<<<<<<<<================\n")
 
 
-# MAIN MENU
+# Function Main Menu 
 def main():
-    while True:                            #repeat forever until choosing to exit(2)
+    while True:                            #repeat forever until exit(2) is chosen by the user
         print("\n        _===============_      ")
         print("=========   MAIN MENU   =========")
         print("1. Start Game")
         print("2. Exit")
         print("________                ________")
         print("         ===============")
+
         choice = input("\nEnter your choice: ")
 
         if choice == "1":
             start_game()
         elif choice == "2":
-            print("\n╔════════════════════════╗")
-            print("║ Thank you for playing!")
-            print("╚════════════════════════╝\n")
+            print("\n╔══════════════════════════════════╗")
+            print("║ Thank you for playing! (or not)")
+            print("╚══════════════════════════════════╝\n")
             break
         else:
             print("\nInvalid choice. Try again.")
 
-
 main()     #diri mag start since na define naman ang 'main'
-
-
 
