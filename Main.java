@@ -1,11 +1,11 @@
 import java.util.Scanner;
  
 class Question {            // new class para maka himo ug object para sa mga questions (Question objects)
-    String question;        // string sa question(s)
+    String question;        // Variables - string sa question(s)
     String[] choices;       // list sa mga choices A-D
-    String answer;          // string sa correct answer
-    int points;             // percent deduction kung mali ang answer
-    String difficulty;      // string sa difficulty level
+    String answer;         
+    int points;             
+    String difficulty;      
 
 
     // Constructor — method mag set/assign ug initial values, mo run kung naay new object (Question)
@@ -31,6 +31,36 @@ class Question {            // new class para maka himo ug object para sa mga qu
         }
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
+}
+
+class Player {
+    String name;
+    int age;
+    String adress; 
+
+        public void getPlayerInfo(Scanner scan) {
+                scan.nextLine(); 
+
+                System.out.print("Enter your name: ");
+                name = scan.nextLine();
+
+                System.out.print("Enter your age: ");
+                age = scan.nextInt();
+
+                scan.nextLine();
+                System.out.print("Enter your adress: ");
+                adress = scan.nextLine();
+
+                System.out.println("\n╔════════════════════════════════════════════════════════════════════════════════════════════╗");
+
+                System.out.println("║        ============================ PLAYER INFORMATION ============================");
+                System.out.println("║ Name:" + name);
+                System.out.println("║ Age: " + age);
+                System.out.println("║ Adress: " + adress);
+
+                System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════╝");
+
+        }
 }
 
 public class Main {
@@ -85,6 +115,10 @@ public class Main {
 
     // Nag-handle sa whole game
     public static void startGame(Scanner scan) {        //scanner ara mag read sa user input 
+
+
+        Player player = new Player();                   //kuhaon ang info gikan sa Player gi provide sa user (Player class)
+        player.getPlayerInfo(scan);
         
         double money = 1000000000.0;                    // starting value/money kay 1 Billion
         int totalPoints = 0;                            // points na ma earn, starting sa 0
@@ -154,6 +188,10 @@ public class Main {
                 "What caused Azul Ashengrotto to Overblot?",
                 new String[]{"A. A broken contract", "B. Losing his Mostro Lounge business at the NRC", "C. Fear of losing the power he worked hard to gain", "D. Jade and Floyd betraying him"},
                 "C",55,"Hard" ),
+            new Question(
+                "Who is the housewarden of Savanaclaw",
+                new String[]{"A.LEONA", "B. ROOK", "C. ACE", "D. RUGGIE"},
+                "A",55,"Hard" ),
     
         };
 
@@ -192,7 +230,7 @@ public class Main {
 
         // Game Over Message
         System.out.println("\n================>>> GAME OVER <<<================");
-        System.out.printf("Remaining Money: PHP %,.0f%n", money);  //print w/format ang float na naay comma, ug zero decimal places
+        System.out.printf("Remaining Money: PHP %,.0f%n", money);            //print w/format ang float na naay comma, ug zero decimal places
         System.out.println("Total Points Earned: " + totalPoints);
         System.out.println("You answered " + questionsAnswered + " question(s).");
         System.out.println("\n================>>>>>>>>><<<<<<<<<================\n");
